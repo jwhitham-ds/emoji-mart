@@ -80,8 +80,8 @@ async function _init(props) {
   }
 
   if (props.custom) {
-    for (let i in props.custom) {
-      i = parseInt(i)
+    for (let x in props.custom) {
+      const i = parseInt(x)
       const category = props.custom[i]
       const prevCategory = props.custom[i - 1]
 
