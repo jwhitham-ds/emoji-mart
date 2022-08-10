@@ -10,13 +10,12 @@ import {
 export let I18n = null
 export let Data = null
 
-async function fetchJSON(src) {
+async function fetchJSON(src: string) {
   const response = await fetch(src)
   return await response.json()
 }
 
 let promise: Promise<void> | null = null
-let initiated = false
 let initCallback = null
 
 export function init(options) {
