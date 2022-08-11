@@ -45,7 +45,7 @@ async function fetchJSON(src: string) {
 }
 
 let promise: Promise<void> | null = null
-let initCallback = null
+let initCallback: ((value: void | PromiseLike<void>) => void) | null = null
 
 export function init(options) {
   promise ||
@@ -259,7 +259,7 @@ async function _init(props) {
     SearchIndex.reset()
   }
 
-  initCallback()
+  if (initCallback) initCallback()
 }
 
 export function getProps(props, defaultProps, element) {
