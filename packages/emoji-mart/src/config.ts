@@ -70,7 +70,7 @@ export interface I18n {
 }
 
 export let i18n: I18n;
-export let data: Data | null = null
+export let data: Data;
 
 async function fetchJSON(src: string) {
   const response = await fetch(src)
