@@ -37,7 +37,7 @@ export interface SkinVariation {
 }
 
 export let I18n = null
-export let Data: Data | null = null
+export let data: Data | null = null
 
 async function fetchJSON(src: string) {
   const response = await fetch(src)
@@ -66,31 +66,31 @@ async function _init(props) {
   set || (set = PickerProps.set.value)
   locale || (locale = PickerProps.locale.value)
 
-  if (!Data) {
-    Data =
+  if (!data) {
+    data =
       (typeof props.data === 'function' ? await props.data() : props.data) ||
       (await fetchJSON(
         `https://cdn.jsdelivr.net/npm/@emoji-mart/data@latest/sets/${emojiVersion}/${set}.json`,
       ))
 
-    Data.emoticons = {}
-    Data.natives = {}
+    data.emoticons = {}
+    data.natives = {}
 
-    Data.categories.unshift({
+    data.categories.unshift({
       id: 'frequent',
       emojis: [],
     })
 
-    for (const alias in Data.aliases) {
-      const emojiId = Data.aliases[alias]
-      const emoji = Data.emojis[emojiId]
+    for (const alias in data.aliases) {
+      const emojiId = data.aliases[alias]
+      const emoji = data.emojis[emojiId]
       if (!emoji) continue
 
       emoji.aliases || (emoji.aliases = [])
       emoji.aliases.push(alias)
     }
   } else {
-    Data.categories = Data.categories.filter((c) => {
+    data.categories = data.categories.filter((c) => {
       const isCustom = !!c.name
       if (!isCustom) return true
 
@@ -123,7 +123,7 @@ async function _init(props) {
         category.target = prevCategory.target || prevCategory
       }
 
-      Data.categories.push(category)
+      data.categories.push(category)
 
       const ids = []
       for (const emoji of category.emojis) {
@@ -131,7 +131,7 @@ async function _init(props) {
           continue
         }
 
-        Data.emojis[emoji.id] = emoji
+        data.emojis[emoji.id] = emoji
         ids.push(emoji.id)
       }
 
@@ -140,7 +140,7 @@ async function _init(props) {
   }
 
   if (props.categories) {
-    Data.categories = Data.categories
+    data.categories = data.categories
       .filter((c) => {
         return props.categories.indexOf(c.id) != -1
       })
@@ -159,17 +159,17 @@ async function _init(props) {
     noCountryFlags = props.noCountryFlags || NativeSupport.noCountryFlags()
   }
 
-  let categoryIndex = Data.categories.length
+  let categoryIndex = data.categories.length
   let resetSearchIndex = false
   while (categoryIndex--) {
-    const category = Data.categories[categoryIndex]
+    const category = data.categories[categoryIndex]
 
     if (category.id == 'frequent') {
       category.emojis = FrequentlyUsed.get(props)
     }
 
     if (!category.emojis || !category.emojis.length) {
-      Data.categories.splice(categoryIndex, 1)
+      data.categories.splice(categoryIndex, 1)
       continue
     }
 
@@ -183,7 +183,7 @@ async function _init(props) {
 
     let emojiIndex = category.emojis.length
     while (emojiIndex--) {
-      const emoji = Data.emojis[category.emojis[emojiIndex]]
+      const emoji = data.emojis[category.emojis[emojiIndex]]
       const ignore = () => {
         category.emojis.splice(emojiIndex, 1)
       }
@@ -231,8 +231,8 @@ async function _init(props) {
 
         if (emoji.emoticons) {
           for (const emoticon of emoji.emoticons) {
-            if (Data.emoticons[emoticon]) continue
-            Data.emoticons[emoticon] = emoji.id
+            if (data.emoticons[emoticon]) continue
+            data.emoticons[emoticon] = emoji.id
           }
         }
 
@@ -243,7 +243,7 @@ async function _init(props) {
 
           const { native } = skin
           if (native) {
-            Data.natives[native] = emoji.id
+            data.natives[native] = emoji.id
             emoji.search += `,${native}`
           }
 
