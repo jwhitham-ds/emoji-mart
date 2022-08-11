@@ -270,8 +270,10 @@ async function _init(props) {
 
         if (emoji.emoticons) {
           for (const emoticon of emoji.emoticons) {
-            if (data.emoticons[emoticon]) continue
-            data.emoticons[emoticon] = emoji.id
+            if (data.emoticons) {
+              if (data.emoticons[emoticon]) continue
+              data.emoticons[emoticon] = emoji.id
+            }
           }
         }
 
