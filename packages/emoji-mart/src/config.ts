@@ -69,7 +69,7 @@ export interface I18n {
   skins: Record<SkinChoice, string>;
 }
 
-export let I18n: I18n;
+export let i18n: I18n;
 export let data: Data | null = null
 
 async function fetchJSON(src: string) {
@@ -131,8 +131,8 @@ async function _init(props) {
     })
   }
 
-  if (!I18n) {
-    I18n =
+  if (!i18n) {
+    i18n =
       (typeof props.i18n === 'function' ? await props.i18n() : props.i18n) ||
       (locale == 'en'
         ? i18n_en
@@ -150,7 +150,7 @@ async function _init(props) {
       if (!category.emojis || !category.emojis.length) continue
 
       category.id || (category.id = `custom_${i + 1}`)
-      category.name || (category.name = I18n.categories.custom)
+      category.name || (category.name = i18n.categories.custom)
 
       if (prevCategory && !category.icon) {
         category.target = prevCategory.target || prevCategory
