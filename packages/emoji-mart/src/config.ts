@@ -36,7 +36,40 @@ export interface SkinVariation {
   y: number;
 }
 
-export let I18n = null
+export type CategoryName =
+  | 'activity'
+  | 'custom'
+  | 'flags'
+  | 'foods'
+  | 'frequent'
+  | 'nature'
+  | 'objects'
+  | 'people'
+  | 'places'
+  | 'search'
+  | 'symbols'
+
+export type SkinChoice =
+  | 'choose'
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+
+export interface I18n {
+  add_custom: string;
+  categories: Record<CategoryName, string>;
+  pick: string;
+  rtl?: boolean;
+  search: string;
+  search_no_results_1: string;
+  search_no_results_2: string;
+  skins: Record<SkinChoice, string>;
+}
+
+export let I18n: I18n;
 export let data: Data | null = null
 
 async function fetchJSON(src: string) {
