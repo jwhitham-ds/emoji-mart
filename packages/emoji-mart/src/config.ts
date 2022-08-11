@@ -7,8 +7,37 @@ import {
   SearchIndex,
 } from './helpers'
 
+export interface Data {
+  categories: Category[];
+  emojis: { [key: string]: Emoji };
+  aliases: { [key: string]: string };
+  sheet: { cols: number, rows: number };
+  emoticons?: { [emoticon: string]: string };
+  natives?: { [native: string]: string };
+}
+
+export interface Category {
+  id: string;
+  name?: string;
+  emojis: string[];
+}
+
+export interface Emoji {
+  aliases: string[];
+  id: string;
+  name: string;
+  skins: SkinVariation[];
+}
+
+export interface SkinVariation {
+  unified: string;
+  native: string;
+  x: number;
+  y: number;
+}
+
 export let I18n = null
-export let Data = null
+export let Data: Data | null = null
 
 async function fetchJSON(src: string) {
   const response = await fetch(src)
