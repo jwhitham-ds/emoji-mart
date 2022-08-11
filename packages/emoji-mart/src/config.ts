@@ -17,6 +17,7 @@ export interface Data {
 }
 
 export interface Category {
+  icon?: string;
   id: string;
   name?: string;
   emojis: string[];
@@ -24,12 +25,17 @@ export interface Category {
 
 export interface Emoji {
   aliases: string[];
+  emoticons?: string[];
   id: string;
+  keywords?: string[];
   name: string;
+  search?: string;
   skins: SkinVariation[];
+  version: number;
 }
 
 export interface SkinVariation {
+  shortcodes?: string;
   unified: string;
   native: string;
   x: number;
