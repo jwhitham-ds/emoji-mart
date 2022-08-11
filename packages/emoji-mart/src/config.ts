@@ -77,8 +77,8 @@ async function fetchJSON(src: string) {
   return await response.json()
 }
 
-let promise: Promise<void> | null = null
-let initCallback: ((value: void | PromiseLike<void>) => void) | null = null
+let promise: Promise<void>
+let initCallback: (value: void | PromiseLike<void>) => void
 
 export function init(options) {
   promise ||
