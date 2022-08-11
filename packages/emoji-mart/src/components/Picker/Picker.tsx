@@ -1,7 +1,7 @@
 import { Component, createRef } from 'preact'
 
 import { deepEqual, sleep } from '../../utils'
-import { Data, I18n, init } from '../../config'
+import { data, i18n, init } from '../../config'
 import { SearchIndex, Store, FrequentlyUsed } from '../../helpers'
 import Icons from '../../icons'
 
@@ -33,7 +33,7 @@ export default class Picker extends Component {
 
   componentWillMount() {
     this.observers = []
-    this.dir = I18n.rtl ? 'rtl' : 'ltr'
+    this.dir = i18n.rtl ? 'rtl' : 'ltr'
     this.refs = {
       menu: createRef(),
       navigation: createRef(),
@@ -124,11 +124,11 @@ export default class Picker extends Component {
   }
 
   initGrid() {
-    const { categories } = Data
+    const { categories } = data
 
     this.refs.categories = new Map()
 
-    const navKey = Data.categories.map((category) => category.id).join(',')
+    const navKey = data.categories.map((category) => category.id).join(',')
     if (this.navKey && this.navKey != navKey) {
       this.refs.scroll.current && (this.refs.scroll.current.scrollTop = 0)
     }
@@ -705,15 +705,15 @@ export default class Picker extends Component {
             ) : noSearchResults ? (
               <div class={`padding-${this.dir[2]} align-${this.dir[0]}`}>
                 <div class="ellipsis" style={{ fontSize: '1.1em' }}>
-                  {I18n.search_no_results_1}
+                  {i18n.search_no_results_1}
                 </div>
                 <div class="ellipsis color-c" style={{ fontSize: '.9em' }}>
-                  {I18n.search_no_results_2}
+                  {i18n.search_no_results_2}
                 </div>
               </div>
             ) : (
               <div class="color-c" style={{ fontSize: 21 }}>
-                {I18n.pick}
+                {i18n.pick}
               </div>
             )}
           </div>
@@ -796,7 +796,7 @@ export default class Picker extends Component {
             <input
               type="search"
               ref={this.refs.searchInput}
-              placeholder={I18n.search}
+              placeholder={i18n.search}
               onClick={this.handleSearchClick}
               onInput={this.handleSearchInput}
               onKeyDown={this.handleSearchKeyDown}
@@ -830,13 +830,13 @@ export default class Picker extends Component {
     return (
       <div class="category" ref={this.refs.search}>
         <div class={`sticky padding-small align-${this.dir[0]}`}>
-          {I18n.categories.search}
+          {i18n.categories.search}
         </div>
         <div>
           {!searchResults.length ? (
             <div class={`padding-small align-${this.dir[0]}`}>
               {this.props.onAddCustomEmoji && (
-                <a onClick={this.props.onAddCustomEmoji}>{I18n.add_custom}</a>
+                <a onClick={this.props.onAddCustomEmoji}>{i18n.add_custom}</a>
               )}
             </div>
           ) : (
@@ -860,7 +860,7 @@ export default class Picker extends Component {
   }
 
   renderCategories() {
-    const { categories } = Data
+    const { categories } = data
     const hidden = !!this.state.searchResults
 
     return (
@@ -880,7 +880,7 @@ export default class Picker extends Component {
               ref={root}
             >
               <div class={`sticky padding-small align-${this.dir[0]}`}>
-                {category.name || I18n.categories[category.id]}
+                {category.name || i18n.categories[category.id]}
               </div>
               <div
                 class="relative"
@@ -950,8 +950,8 @@ export default class Picker extends Component {
           ref={this.refs.skinToneButton}
           class="skin-tone-button flex flex-auto flex-center flex-middle"
           aria-selected={this.state.showSkins ? '' : undefined}
-          aria-label={I18n.skins.choose}
-          title={I18n.skins.choose}
+          aria-label={i18n.skins.choose}
+          title={i18n.skins.choose}
           onClick={this.openSkins}
           style={{
             width: this.props.emojiSize,
@@ -992,7 +992,7 @@ export default class Picker extends Component {
         ref={this.refs.menu}
         role="radiogroup"
         dir={this.dir}
-        aria-label={I18n.skins.choose}
+        aria-label={i18n.skins.choose}
         class="menu hidden"
         data-position={position.top ? 'top' : 'bottom'}
         style={position}
@@ -1007,7 +1007,7 @@ export default class Picker extends Component {
                 type="radio"
                 name="skin-tone"
                 value={skin}
-                aria-label={I18n.skins[skin]}
+                aria-label={i18n.skins[skin]}
                 ref={checked ? this.refs.skinToneRadio : null}
                 defaultChecked={checked}
                 onChange={() => this.handleSkinMouseOver(skin)}
@@ -1032,7 +1032,7 @@ export default class Picker extends Component {
                 class="option flex flex-grow flex-middle"
               >
                 <span class={`skin-tone skin-tone-${skin}`}></span>
-                <span class="margin-small-lr">{I18n.skins[skin]}</span>
+                <span class="margin-small-lr">{i18n.skins[skin]}</span>
               </button>
             </div>
           )

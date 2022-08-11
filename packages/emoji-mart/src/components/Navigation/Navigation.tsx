@@ -1,5 +1,5 @@
 import { PureComponent } from 'preact/compat'
-import { Data, I18n } from '../../config'
+import { data, i18n } from '../../config'
 import Icons from '../../icons'
 
 const THEME_ICONS = {
@@ -11,7 +11,7 @@ export default class Navigation extends PureComponent {
   constructor() {
     super()
 
-    this.categories = Data.categories.filter((category) => {
+    this.categories = data.categories.filter((category) => {
       return !category.target
     })
 
@@ -56,7 +56,7 @@ export default class Navigation extends PureComponent {
       <nav id="nav" class="padding" data-position={this.props.position}>
         <div class="flex relative">
           {this.categories.map((category, i) => {
-            const title = category.name || I18n.categories[category.id]
+            const title = category.name || i18n.categories[category.id]
             const selected =
               !this.props.unfocused && category.id == this.state.categoryId
 

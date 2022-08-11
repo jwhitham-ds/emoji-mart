@@ -1,4 +1,4 @@
-import { Data } from '../../config'
+import { data } from '../../config'
 import { SearchIndex } from '../../helpers'
 
 export default function Emoji(props) {
@@ -65,12 +65,12 @@ export default function Emoji(props) {
             width: props.size,
             height: props.size,
             backgroundImage: `url(${spritesheetSrc})`,
-            backgroundSize: `${100 * Data.sheet.cols}% ${
-              100 * Data.sheet.rows
+            backgroundSize: `${100 * data.sheet.cols}% ${
+              100 * data.sheet.rows
             }%`,
             backgroundPosition: `${
-              (100 / (Data.sheet.cols - 1)) * emojiSkin.x
-            }% ${(100 / (Data.sheet.rows - 1)) * emojiSkin.y}%`,
+              (100 / (data.sheet.cols - 1)) * emojiSkin.x
+            }% ${(100 / (data.sheet.rows - 1)) * emojiSkin.y}%`,
           }}
         ></span>
       )}

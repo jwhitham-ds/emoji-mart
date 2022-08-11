@@ -1,4 +1,4 @@
-import { init, Data } from '../config'
+import { init, data } from '../config'
 
 const SHORTCODES_REGEX = /^(?:\:([^\:]+)\:)(?:\:skin-tone-(\d)\:)?$/
 let Pool = null
@@ -9,9 +9,9 @@ function get(emojiId) {
   }
 
   return (
-    Data.emojis[emojiId] ||
-    Data.emojis[Data.aliases[emojiId]] ||
-    Data.emojis[Data.natives[emojiId]]
+    data.emojis[emojiId] ||
+    data.emojis[data.aliases[emojiId]] ||
+    data.emojis[data.natives[emojiId]]
   )
 }
 
@@ -35,7 +35,7 @@ async function search(value, { maxResults } = {}) {
 
   if (!values.length) return
 
-  let pool = Pool || (Pool = Object.values(Data.emojis))
+  let pool = Pool || (Pool = Object.values(data.emojis))
   let results, scores
 
   for (const value of values) {
