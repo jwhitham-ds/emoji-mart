@@ -283,7 +283,7 @@ async function _init(props) {
           skinIndex++
 
           const { native } = skin
-          if (native) {
+          if (native && data.natives) {
             data.natives[native] = emoji.id
             emoji.search += `,${native}`
           }
