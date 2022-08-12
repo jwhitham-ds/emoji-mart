@@ -10,7 +10,6 @@
     "isolatedModules": true,
     "strict": true,
     "skipLibCheck": true,
-    "jsx": "react",
     "resolveJsonModule": true
   },
   "include": [
